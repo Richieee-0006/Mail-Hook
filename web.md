@@ -1,16 +1,15 @@
 # Mail-Hook Gateway
 
-High-performance institutional email forwarding system with centralized management.
+FastAPI gateway that filters and forwards UJEP institutional emails to Discord.
 
 ## Key Features
-- **Smart Processing:** Automated multilingual (CZ/EN) content isolation and message segmentation.
-- **Admin Control:** Secure web interface for history monitoring and real-time configuration.
-- **Edge Security:** Native integration with Cloudflare Workers for secure request tunneling.
-- **Content Filtering:** Advanced sender rejection and keyword-based filtering system.
-- **Seamless Delivery:** Optimized for reliable delivery of institutional emails to Discord.
+- **Content Processing:** Isolates CZ/EN sections and splits long emails into Discord embeds.
+- **Admin Dashboard:** Web UI for viewing message history, managing filter rules, and configuring the bot.
+- **Edge Proxy:** Runs behind a Cloudflare Worker for request validation and network isolation.
+- **Sender & Keyword Filtering:** Drops unauthorized senders and rejected keywords before forwarding.
 
 ## Tech Stack
-- **Backend:** FastAPI, Python 3.10+
+- **Backend:** FastAPI, Python 3.10+, HTTPX
 - **Infrastructure:** Cloudflare Workers, Google Apps Script
-- **Security:** Bcrypt, JWT/Timed-Tokens
-- **Frontend:** Vanilla HTML5/CSS3 (Modern UI)
+- **Security:** `bcrypt`, `itsdangerous`
+- **Frontend:** HTML5, CSS3

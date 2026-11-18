@@ -1,38 +1,36 @@
 # Mail-Hook
 
-Mail-Hook is a high-performance, modular FastAPI gateway designed to intercept, process, and forward university or institutional emails to Discord. It provides a centralized administration interface for managing message processing, content filtering, and system configuration.
+FastAPI gateway that receives UJEP institutional emails, filters them, and forwards them to Discord. Includes a web dashboard for message history, filter rules, and bot configuration.
 
-## Key Functionality
+## Features
 
-*   **Intelligent Payload Processing:** Automated detection and isolation of multilingual content (CZ/EN) or segmentation of long-form messages into Discord-compliant embeds.
-*   **Administrative Interface:** A secure, responsive web dashboard for monitoring message history, managing filter rules, and configuring bot identity.
-*   **Security Architecture:** Implementation of session-based authentication utilizing bcrypt password hashing and URLSafeTimedSerialization for secure token management.
-*   **Edge Proxy Integration:** Designed to operate behind a Cloudflare Worker proxy for enhanced network isolation and request validation.
-*   **Advanced Filtering Engine:** Real-time exclusion of unauthorized senders and keyword-based message rejection.
+- Isolates Czech and English sections and splits long emails into Discord-sized embeds.
+- Web dashboard for checking delivery history, editing sender/keyword filters, and updating bot settings.
+- Session authentication using `bcrypt` password hashes and `itsdangerous` signed tokens.
+- Optional Cloudflare Worker proxy (`worker.js`) for request validation in front of the origin server.
 
-## Technical Specifications
+## Tech Stack
 
-*   **Backend Framework:** FastAPI (Asynchronous Python)
-*   **Communication:** HTTPX (Async HTTP Client)
-*   **Security:** itsdangerous (Session signing), bcrypt (Password hashing)
-*   **Frontend:** Standard-compliant HTML5/CSS3 (Modernized dark interface)
-*   **Infrastructure:** Cloudflare Workers (JavaScript Proxy), Google Apps Script (Email Monitoring)
+- **Backend:** FastAPI, HTTPX (Python 3.10+)
+- **Security:** `itsdangerous`, `bcrypt`
+- **Frontend:** HTML5, CSS3
+- **Edge & Mail:** Cloudflare Workers (`worker.js`), Google Apps Script
 
-## Deployment and Installation
+## Installation and Deployment
 
-1.  **Repository Initialization:** Clone the project to your local or production environment.
-2.  **Environment Configuration:** Copy `env.example` to `.env` and populate with necessary API keys and secrets.
-3.  **Dependency Management:** Install required Python packages: `pip install -r requirements.txt`.
-4.  **Process Management:** Deploy using Gunicorn with Uvicorn workers as specified in `deploy.sh`.
-5.  **Edge Setup:** Publish the Cloudflare Worker script located in `worker.js` to handle incoming webhooks.
+1. Clone the repository.
+2. Copy `env.example` to `.env` and fill in your secrets and webhook URLs.
+3. Install dependencies: `pip install -r requirements.txt`.
+4. Start the server using Gunicorn and Uvicorn workers as configured in `deploy.sh`.
+5. Deploy `worker.js` to Cloudflare Workers to route incoming webhooks.
 
-## System Architecture
+## Files
 
-*   `app.py`: Primary application entry point and administrative UI.
-*   `mail_logic.py`: Core processing engine for email parsing and Discord integration.
-*   `auth_logic.py`: Authentication middleware and session management.
-*   `worker.js`: Cloudflare-specific proxy logic for secure request tunneling.
+- `app.py`: FastAPI entrypoint and admin UI routes.
+- `mail_logic.py`: Email parsing, filtering, and Discord webhook delivery.
+- `auth_logic.py`: Password verification and session handling.
+- `worker.js`: Cloudflare Worker proxy script.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License.

@@ -2,7 +2,9 @@
 .venv
 __pycache__
 *.pyc
+*.bak
 history.json
+status.json
 filters.json
 data/
 .wrangler/

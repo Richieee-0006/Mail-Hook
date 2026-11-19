@@ -6,8 +6,9 @@ FastAPI gateway that receives UJEP institutional emails, filters them, and forwa
 
 - Isolates Czech and English sections and splits long emails into Discord-sized embeds.
 - Web dashboard for checking delivery history, editing sender/keyword filters, and updating bot settings.
-- Session authentication using `bcrypt` password hashes and `itsdangerous` signed tokens.
-- Optional Cloudflare Worker proxy (`worker.js`) for request validation in front of the origin server.
+- Dynamic text and regex obfuscation rules (`filters.json` / `filters.example.json`) to mask sensitive IDs or URL tokens before forwarding.
+- Session authentication using `bcrypt` password hashes, `itsdangerous` signed tokens, CSRF protection, and SQLite-backed login rate limiting.
+- Webhook validation via `X-Webhook-Secret`, optional Cloudflare Access Service Token headers, and Cloudflare Worker proxy (`worker.js`).
 
 ## Tech Stack
 
@@ -19,7 +20,7 @@ FastAPI gateway that receives UJEP institutional emails, filters them, and forwa
 ## Installation and Deployment
 
 1. Clone the repository.
-2. Copy `env.example` to `.env` and fill in your secrets and webhook URLs.
+2. Copy `env.example` to `.env` and `filters.example.json` to `filters.json`, then fill in your secrets and rules.
 3. Install dependencies: `pip install -r requirements.txt`.
 4. Start the server using Gunicorn and Uvicorn workers as configured in `deploy.sh`.
 5. Deploy `worker.js` to Cloudflare Workers to route incoming webhooks.

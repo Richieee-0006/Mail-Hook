@@ -1,0 +1,16 @@
+{
+  "senders": [],
+  "keywords": [],
+  "obfuscations": [
+    {
+      "pattern": "F00000",
+      "replacement": "F#####",
+      "is_regex": false
+    },
+    {
+      "pattern": "https?://orsee\\.fse\\.ujep\\.cz/\\S*[?&]p=[A-Za-z0-9+/=_-]+",
+      "replacement": "[CITLIVÝ ODKAZ ODSTRANĚN]",
+      "is_regex": true
+    }
+  ]
+}
